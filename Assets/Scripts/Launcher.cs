@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
-    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private List<Projectile> projectiles = new List<Projectile>();
+    private Projectile projectilePrefab;
     [SerializeField] private float launchForce = 10f;
     [SerializeField] private Transform launchPoint;
     [SerializeField] private SimulatedPhysics simulatedPhysics;
 
+    private void Start() {
+        projectilePrefab = projectiles[0];
+    }
     private void Update() {
         
 
@@ -34,5 +38,8 @@ public class Launcher : MonoBehaviour
         Projectile projectile = Instantiate(projectilePrefab, launchPoint.position, launchPoint.rotation);
         projectile.transform.parent = gameObject.transform.root;
         projectile.Launch(launchPoint.right * launchForce);
+
+        projectilePrefab = projectiles[Random.Range(0, projectiles.Count)];
+        Debug.Log("Next Projectile: " + projectilePrefab.name);
     }
 }

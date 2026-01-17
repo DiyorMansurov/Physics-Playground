@@ -45,11 +45,23 @@ public class SimulatedPhysics : MonoBehaviour
     [SerializeField] private LineRenderer line;
     [SerializeField] private int maxPhysicalIterations;
     [SerializeField] private LayerMask collisionMask;
+    [SerializeField] private LayerMask billboardMask;
 
     public void SimulateTrajectory(Projectile projectile, Vector3 pos, Vector3 velocity)
     {
         var simulatedProjectile = Instantiate(projectile, pos, Quaternion.identity);
-        simulatedProjectile.GetComponent<Renderer>().enabled = false;
+        if (simulatedProjectile.GetComponent<Renderer>() != null)
+        {
+            simulatedProjectile.GetComponent<Renderer>().enabled = false;
+        } else
+        {
+            var renderers = simulatedProjectile.GetComponentsInChildren<Renderer>();
+            foreach (var rend in renderers)
+            {
+                rend.enabled = false;
+            }
+        }
+        
         SceneManager.MoveGameObjectToScene(simulatedProjectile.gameObject, _simulatedScene);
         simulatedProjectile.Launch(velocity);
 

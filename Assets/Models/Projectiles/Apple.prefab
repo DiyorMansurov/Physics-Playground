@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6867106651871412702}
   m_Layer: 2
   m_Name: Apple
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3eb7ca54d47e2440b09851779e6a795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyAfterSeconds: 5
